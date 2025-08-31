@@ -8,7 +8,7 @@ const Signup = () => {
   const navigator = useNavigate()
 
   const handleSignup = () => {
-    axios.post("http://localhost:3000/signup", { username: userName, password })
+    axios.post("/api/signup", { username: userName, password })
       .then((res) => {
         if (res.data.success) {
           alert("Signup Successful, Please Login!")

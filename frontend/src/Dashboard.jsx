@@ -25,7 +25,8 @@ const Dashboard = () => {
 
   const fetchDashboardData = () => {
     setLoading(true);
-    axios.post("http://localhost:3000/dashboard", { username })
+    axios.post("/api/dashboard", { username })
+
       .then(res => {
         setUser({ name: username });
         setBlogs(res.data.blogs);
@@ -39,13 +40,15 @@ const Dashboard = () => {
   };
 
   const fetchNotifications = () => {
-    axios.get(`http://localhost:3000/notifications/${username}`)
+    axios.get(`/api/notifications/${username}`)
+
       .then(res => setNotifications(res.data.notifications))
       .catch(err => console.error(err));
   };
 
   const fetchProfile = () => {
-    axios.get(`http://localhost:3000/profile/${username}`)
+    axios.get(`/api/profile/${username}`)
+
       .then(res => setProfile(res.data.profile))
       .catch(err => console.error(err));
   };
@@ -55,11 +58,8 @@ const Dashboard = () => {
     setLoading(true);
     setMessage("");
     
-    axios.post("http://localhost:3000/blogs", { 
-      username, 
-      title: newBlog.title, 
-      content: newBlog.content 
-    })
+  axios.post("/api/blogs", { username, title: newBlog.title, content: newBlog.content })
+
       .then(res => {
         if (res.data.success) {
           setNewBlog({ title: "", content: "" });
@@ -81,10 +81,8 @@ const Dashboard = () => {
   const handleUpdateBlog = (e) => {
     e.preventDefault();
     setLoading(true);
-    axios.put(`http://localhost:3000/blogs/${editingBlog.id}`, { 
-      title: editingBlog.title, 
-      content: editingBlog.content 
-    })
+   axios.put(`/api/blogs/${editingBlog.id}`, { title: editingBlog.title, content: editingBlog.content })
+
       .then(res => {
         setEditingBlog(null);
         fetchDashboardData();
@@ -99,7 +97,8 @@ const Dashboard = () => {
   const handleDeleteBlog = (id) => {
     if (window.confirm("Are you sure you want to delete this blog?")) {
       setLoading(true);
-      axios.delete(`http://localhost:3000/blogs/${id}`)
+     axios.delete(`/api/blogs/${id}`)
+
         .then(res => {
           fetchDashboardData();
           setLoading(false);
@@ -112,7 +111,8 @@ const Dashboard = () => {
   };
 
   const handleLikeBlog = (id) => {
-  axios.post(`http://localhost:3000/blogs/${id}/like`, { username })
+ axios.post(`/api/blogs/${id}/like`, { username })
+
     .then(res => {
       setBlogs(prevBlogs => 
         prevBlogs.map(blog => 
@@ -136,7 +136,8 @@ const Dashboard = () => {
   const handleProfileUpdate = (e) => {
     e.preventDefault();
     setLoading(true);
-    axios.put(`http://localhost:3000/profile/${username}`, profile)
+    axios.put(`/api/profile/${username}`, profile)
+
       .then(res => {
         setMessage("Profile updated successfully!");
         setLoading(false);
