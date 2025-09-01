@@ -8,7 +8,7 @@ const Signup = () => {
   const navigator = useNavigate()
 
   const handleSignup = () => {
-   axios.post("http://localhost:3000/signup", { username: userName, password })
+   axios.post("https://mindscribe-web-app-backend.onrender.com/signup", { username: userName, password })
 
       .then((res) => {
         if (res.data.success) {
