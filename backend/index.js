@@ -2,11 +2,17 @@ const express = require("express");
 const cors = require("cors");
 
 const app = express();
-app.use(cors({
-  origin: "https://mindscribe-web-app-frontend.onrender.com", 
-  methods: ["GET", "POST", "PUT", "DELETE"],
+const corsOptions = {
+  origin: "https://mindscribe-web-app-frontend.onrender.com",
+  methods: ["GET", "POST", "PUT", "DELETE", "OPTIONS"],
+  allowedHeaders: ["Content-Type", "Authorization"],
   credentials: true
-}));
+};
+
+app.use(cors(corsOptions));
+
+app.options("*", cors(corsOptions));
+
 app.use(express.json());
 
 let users = [
