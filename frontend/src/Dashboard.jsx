@@ -26,7 +26,7 @@ const Dashboard = () => {
   const fetchDashboardData = () => {
     setLoading(true);
 
-axios.post("http://localhost:3000/dashboard", { username })
+axios.post("https://mindscribe-web-app-backend.onrender.com/dashboard", { username })
 
 
       .then(res => {
@@ -42,7 +42,7 @@ axios.post("http://localhost:3000/dashboard", { username })
   };
 
   const fetchNotifications = () => {
-axios.get(`http://localhost:3000/notifications/${username}`)
+axios.get(`https://mindscribe-web-app-backend.onrender.com/notifications/${username}`)
 
 
       .then(res => setNotifications(res.data.notifications))
@@ -50,7 +50,7 @@ axios.get(`http://localhost:3000/notifications/${username}`)
   };
 
   const fetchProfile = () => {
-    axios.get(`http://localhost:3000/profile/${username}`)
+    axios.get(`https://mindscribe-web-app-backend.onrender.com/profile/${username}`)
 
       .then(res => setProfile(res.data.profile))
       .catch(err => console.error(err));
@@ -61,7 +61,7 @@ axios.get(`http://localhost:3000/notifications/${username}`)
     setLoading(true);
     setMessage("");
     
-axios.post("http://localhost:3000/blogs", { username, title: newBlog.title, content: newBlog.content })
+axios.post("https://mindscribe-web-app-backend.onrender.com/blogs", { username, title: newBlog.title, content: newBlog.content })
 
       .then(res => {
         if (res.data.success) {
@@ -84,7 +84,7 @@ axios.post("http://localhost:3000/blogs", { username, title: newBlog.title, cont
   const handleUpdateBlog = (e) => {
     e.preventDefault();
     setLoading(true);
-   axios.put(`http://localhost:3000/blogs/${editingBlog.id}`, { title: editingBlog.title, content: editingBlog.content })
+   axios.put(`https://mindscribe-web-app-backend.onrender.com/blogs/${editingBlog.id}`, { title: editingBlog.title, content: editingBlog.content })
 
       .then(res => {
         setEditingBlog(null);
@@ -100,7 +100,7 @@ axios.post("http://localhost:3000/blogs", { username, title: newBlog.title, cont
   const handleDeleteBlog = (id) => {
     if (window.confirm("Are you sure you want to delete this blog?")) {
       setLoading(true);
-     axios.delete(`http://localhost:3000/blogs/${id}`)
+     axios.delete(`https://mindscribe-web-app-backend.onrender.com/blogs/${id}`)
 
         .then(res => {
           fetchDashboardData();
@@ -114,7 +114,7 @@ axios.post("http://localhost:3000/blogs", { username, title: newBlog.title, cont
   };
 
   const handleLikeBlog = (id) => {
- axios.post(`http://localhost:3000/blogs/${id}/like`, { username })
+ axios.post(`https://mindscribe-web-app-backend.onrender.com/blogs/${id}/like`, { username })
 
     .then(res => {
       setBlogs(prevBlogs => 
@@ -137,7 +137,7 @@ axios.post("http://localhost:3000/blogs", { username, title: newBlog.title, cont
   const handleProfileUpdate = (e) => {
     e.preventDefault();
     setLoading(true);
-    axios.put(`http://localhost:3000/profile/${username}`, profile)
+    axios.put(`https://mindscribe-web-app-backend.onrender.com/profile/${username}`, profile)
 
       .then(res => {
         setMessage("Profile updated successfully!");
