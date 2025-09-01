@@ -16,7 +16,7 @@ const App = () => {
   }
 
   const Check = () => {
-    axios.post("http://localhost:3000/login", { username: userName, password })
+    axios.post("https://mindscribe-web-app-backend.onrender.com/login", { username: userName, password })
 
       .then((res) => {
         if (res.data.success) {
